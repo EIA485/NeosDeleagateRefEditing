@@ -1,0 +1,52 @@
+# This file is used by the Thunderstore CLI to build and publish to Thunderstore. https://github.com/thunderstore-io/thunderstore-cli
+
+[config]
+schemaVersion = "0.0.1"
+
+[package]
+namespace = "eia485"
+name = "DeleagateRefEditing"
+versionNumber = "1.0.0"
+description = "adds a ref field next to delegate editors allowing you to change what object a delegate is targeting." # max 250 characters
+websiteUrl = "http://github.com/EIA485/NeosDeleagateRefEditing"
+containsNsfwContent = false
+
+[package.dependencies] 
+ResoniteModding-BepisLoader = "1.3.1"
+
+[build]
+icon = "icon.png"
+readme = "README.md"
+outdir = "build"
+
+# Copy the compiled DLL to the plugins folder in mod package
+[[build.copy]]
+source = "DeleagateRefEditing/bin/Release/net9.0/DeleagateRefEditing.dll"
+target = "plugins/"
+
+# Include PDB
+[[build.copy]]
+source = "DeleagateRefEditing/bin/Release/net9.0/DeleagateRefEditing.pdb"
+target = "plugins/"
+
+[[build.copy]]
+source = "DeleagateRefEditingPrePatcher/bin/Release/net9.0/DeleagateRefEditingPrePatcher.dll"
+target = "patchers/"
+
+# Include PDB
+[[build.copy]]
+source = "DeleagateRefEditingPrePatcher/bin/Release/net9.0/DeleagateRefEditingPrePatcher.pdb"
+target = "patchers/"
+
+
+# include LICENSE file in mod package
+[[build.copy]]
+source = "license.txt"
+target = "/"
+
+[publish]
+repository = "https://thunderstore.io"
+communities = ["resonite"]
+
+[publish.categories]
+resonite = [ "mods", "inspectors" ] # https://thunderstore.io/api/experimental/community/resonite/category/
